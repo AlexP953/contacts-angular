@@ -33,4 +33,5 @@ export class FavoritesComponent implements OnInit {
     this.FriendsFService.imageFriend();
   }
 
+
 }

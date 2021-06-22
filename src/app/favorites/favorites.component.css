@@ -9,9 +9,9 @@ h2{
 
  .favos{
     display: inline-flex;
-    flex-direction: row;
+    flex-flow: row nowrap;
     width: 100%;
-    justify-content:space-evenly;
+    
   }
 
   .personFavs{
@@ -31,8 +31,9 @@ h2{
     display: inline-flex;
     justify-content: space-around;
     padding:3%;
-    box-shadow: 5px 5px 10px #8f8f8f;
+    box-shadow: 0.5px 0.5px 2.5px #8f8f8f;
     border-radius: 10%;
+    margin: 0 2%;
   }
 
   

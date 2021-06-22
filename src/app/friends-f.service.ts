@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import contactList from './contacts';
+import favorites from './favorites'
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -8,15 +9,16 @@ import Swal from 'sweetalert2';
 export class FriendsFService implements OnInit {
   isFavorito: boolean;
   contacts: Object[];
+  favList:object[];
 
   constructor() { }
 
   ngOnInit(){
     this.contacts = contactList;
+    this.favList = favorites
   }
   favFriend(){
     Swal.fire('You have added your friend to favorites');
-    // document.getElementById("star").className ='bi bi-star-fill filled icon';
   }
 
   callFriend(){
@@ -33,5 +35,9 @@ export class FriendsFService implements OnInit {
       imageHeight: 250,
       imageAlt: 'A tall image'
     })
+  }
+
+  addToFavList(){
+    this.favList.push()
   }
 }

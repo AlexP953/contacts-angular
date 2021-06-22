@@ -58,7 +58,12 @@
                 </thead>
                 <tbody class="tables" *ngFor="let contact of contacts">
                     <tr class="individual">
-                        <td><i (click)="favFriends()" id="fav" style="cursor: pointer" class="bi bi-star icon"></i></td>
+
+                        <td>
+                            
+                            <i (click)="favFriends(contact)" id="fav" style="cursor: pointer" [ngClass]="!favoriteContact ? 'bi icon bi-star' : log" ></i>
+                        
+                        </td>
                         <td (click)="imageFriend()"><img class="imgMain" src="{{ contact.image }}"></td>
                         <td>{{ contact.name }}</td>
                         <td (click)="mailFriend()">{{ contact.email }}</td>

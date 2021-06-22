@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import contactList from '../contacts';
+import favorites from '../favorites'
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FriendsFService } from '../friends-f.service';
 
@@ -19,6 +20,7 @@ interface Contact {
 })
 
 export class ContactListComponent implements OnInit {
+  favList: object[];
   closeModal: string;
   contacts: Object[];
   state = true;
@@ -37,6 +39,7 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit() {
     this.contacts = contactList;
+    this.favList = favorites
   }
 
   callFriend() {
@@ -52,14 +55,14 @@ export class ContactListComponent implements OnInit {
   }
 
 
-  favFriends() {
-    this.state = !this.state
-    if (this.state === true) {
-      document.getElementById('fav').className = 'bi bi-star icon'
-    } else {
-      document.getElementById('fav').className = 'bi bi-star-fill icon filled'
+  favFriends(contactEntra: object) {
+    let favoriteContact = this.favList.find(contactoDentro => contactoDentro === contactEntra)
+    if (favoriteContact === undefined) {
+      this.favList.push(contactEntra)
+      // document.getElementById('fav').className = 'bi bi-star-fill icon filled'
+    } else{
+      this.favList.pop()
     }
-    
   }
 
 
@@ -98,21 +101,20 @@ export class ContactListComponent implements OnInit {
 
   deleteItem(contact) {
     const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
-      },
-      buttonsStyling: false
+      buttonsStyling: true
     })
 
     swalWithBootstrapButtons.fire({
       title: 'Are you sure?',
+      customClass: {
+        confirmButton: 'btn btn-success btnB',
+        cancelButton: 'btn btn-danger btnB'
+      },
       text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
       cancelButtonText: 'No, cancel!',
-      reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
         this.contacts.splice(this.contacts.indexOf(contact), 1);
